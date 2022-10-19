@@ -1,6 +1,19 @@
 import colors from 'vuetify/es5/util/colors'
 
+import dotenv from "dotenv";
+require('dotenv').config();
+
+const {
+  API_URL
+} = process.env;
+
 export default {
+  server: {
+    port: process.env.LISTEN_PORT
+  },
+  env: {
+    API_URL
+  },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -28,7 +41,36 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+      "~/plugins/axios.js"
   ],
+  auth: {
+    strategies: {
+        local: {
+            endpoints: {
+                login: {
+                    url: "auth/sign_in",
+                    method: "post",
+                    propertyName: "access_token"
+                },
+                user: {
+                    url: "users/mee",
+                    propertyName: "data",
+                    method: "get"
+                },
+                logout: {
+                    url: "auth/sign_out",
+                    method: "post"
+                }
+            }
+        }
+    },
+    redirect: {
+        login: "/auth/login",
+        //home: "/"
+        redirect: false,
+        localStorage: false
+    }
+  },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -44,13 +86,24 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    "@nuxtjs/auth",
+    "@nuxtjs/dotenv"
   ],
-
+  proxy: {
+    '/api': {
+      target: process.env.API_URL
+      // pathRewrite: {
+      //   '^/api' : '/api/v1'
+      // }
+    }
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
+    baseURL: process.env.API_URL,
+    proxyHeaders: false,
+    credentials: false,
+    proxy: false
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
