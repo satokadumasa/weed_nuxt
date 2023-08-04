@@ -49,3 +49,68 @@ else
 end
 ```
 
+■ nginx virtual host conf
+● API
+```bash
+upstream backend {
+  server unix:/home/ubuntu/Projects/weed_nuxt/api-app/tmp/sockets/puma.sock;
+}
+
+server {
+  server_name weed_api.example.com;
+  listen 80;
+
+  root /home/ubuntu/Projects/weed_nuxt/api-app/public;
+
+  location / {
+    try_files $uri @app;
+  }
+
+  location @app {
+    proxy_set_header    Host                $http_host;
+    proxy_set_header    X-Real-IP           $remote_addr;
+    proxy_set_header    X-Forwarded-Host    $host;
+    proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+    proxy_set_header    X-Forwarded-Proto   $scheme;
+    proxy_pass http://backend;
+  }
+
+  location /cable {
+    #proxy_pass http://backend/cable;
+    proxy_pass http://backend;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade websocket;
+    #proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection Upgrade;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    #proxy_set_header X-Forwarded-Proto https;
+    proxy_set_header X-Forwarded-Proto http;
+    proxy_set_header Host $host;
+    proxy_redirect off;
+ }
+}
+```
+
+● Front
+```bash
+server {             # the port nginx is listening on
+    server_name     weed_front2.example.com;    # setup your domain here
+    listen 80; # managed by Certbot
+
+    gzip            on;
+    gzip_types      text/plain application/xml text/css application/javascript;
+    gzip_min_length 1000;
+
+    location / {
+        proxy_redirect                      off;
+        proxy_set_header Host               $host;
+        proxy_set_header X-Real-IP          $remote_addr;
+        proxy_set_header X-Forwarded-For    $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto  $scheme;
+        proxy_read_timeout          1m;
+        proxy_connect_timeout       1m;
+        proxy_pass                          http://localhost:3000; # set the address of the Node.js instance here
+    }
+}
+```
