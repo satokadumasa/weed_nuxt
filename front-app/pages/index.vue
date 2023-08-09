@@ -13,6 +13,32 @@
         </a>
       </div>
     </div>
+    <div
+      style="display: flex;flex-wrap: wrap;flex: 1 1 auto;"
+    >
+      <input
+        v-model="message"
+        style="border: solid 1px; font-size: 13px; width: 100％;"
+        placeholder="メッセージ"
+        required
+      />
+      <v-btn
+        color="primary"
+        class="mb-1 mr-1"
+        @click="send"
+      >
+        送信
+      </v-btn>
+    </div>
+
+    <div>
+      <div
+        v-for="message in messageList"
+      >
+        {{ message }}<br>
+      </div>
+    </div>
+
     <div style="position: fixed;bottom: 40px;display: flex;">
       <v-btn v-if="!this.$auth.loggedIn" variant="primary" to="/signup">サインアップ</v-btn>
       <v-btn v-if="!this.$auth.loggedIn" variant="info" @click="toLogin">ログイン</v-btn>
@@ -23,9 +49,14 @@
 </template>
 
 <script>
+import ActionCable from 'actioncable';
 export default({
   data: function () {
     return {
+      message: "",
+      messageList: [],
+      cable: null,
+      chatChannel: null,
     }
   },
   asyncData({ store, app, query }) {
@@ -35,6 +66,17 @@ export default({
       return {
         boards: _.cloneDeep(store.getters["boards/boards"]),
       };
+    });
+  },
+  created() {
+    const websocketUrl = `${process.env.WS_BASE_URL}/cable`;
+    this.cable = ActionCable.createConsumer(websocketUrl);
+
+    this.chatChannel = this.cable.subscriptions.create( "ChatChannel",{
+      received: (data) => {
+        console.log("created() data:" + JSON.stringify(data));
+        this.messageList.push(data);
+      },
     });
   },
   methods: {
@@ -51,6 +93,14 @@ export default({
     },
     toLogin() {
       this.$router.push("/login");
+    },
+    send() {
+      console.log("this.message:" + JSON.stringify(this.message));
+      this.chatChannel.perform('speak', {
+        message: this.message,
+        name: this.$auth.user.nickname,
+      });
+      this.message = "";
     },
   },
 })

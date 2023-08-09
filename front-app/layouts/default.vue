@@ -64,6 +64,7 @@ export default {
     return {
       messageText: "",
       messageChannel: {},
+      messageList: [],
       clipped: false,
       drawer: false,
       fixed: false,
@@ -92,22 +93,31 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: process.env.SITE_NAME
+      title: process.env.SITE_NAME,
+      cable: null,
     }
   },
   created() {
-    console.log("Before connect(1)");
     const websocketUrl = `${process.env.WS_BASE_URL}/cable`;
-    console.log("Before websocketUrl:" + websocketUrl);
-    const cable = ActionCable.createConsumer(websocketUrl);
+    this.cable = ActionCable.createConsumer(websocketUrl);
 
-    console.log("Before connect(2)");
-    this.messageChannel = cable.subscriptions.create( "ChatChannel",{
+    this.chatChannel = this.cable.subscriptions.create( "ChatChannel",{
       received: (data) => {
-        console.log("Before connected data:" + JSON.stringify(data));
-        this.$store.commit("addMessage", data);
+        this.messageList.push(data);
       },
-    })
+    });
   },
+  methods: {
+    sendMessage(message) {
+      console.log("sentMessage() message  :" + JSON.stringify(message));
+      const speak = () => {
+        // performの第二引数でサーバー側の関数の引数を設定できる
+        this.chatChannel.perform('speak', {
+          message: message,
+          name: this.$auth.user.nickname,
+        })
+      }
+    },
+  }
 }
 </script>
