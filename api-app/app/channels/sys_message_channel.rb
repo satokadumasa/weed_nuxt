@@ -1,19 +1,18 @@
-class ChatChannel < ApplicationCable::Channel
+class SysMessageChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
-    pp "ChatChannel::subscribed()"
+    pp "SysMessageChannel::subscribed()"
     stream_from 'chat'
   end
 
   def unsubscribed
-    PP "ChatChannel::unsubscribed()"
+    PP "SysMessageChannel::unsubscribed()"
     # Any cleanup needed when channel is unsubscribed
   end
 
   def speak(data)
-    pp "ChatChannel::speak() START"
-    pp "ChatChannel::speak() data:" << data.inspect
+    pp "SysMessageChannel::speak() START"
     ActionCable.server.broadcast('chat', { sender: current_user.name, body: data['message'] })
-    pp "ChatChannel::speak() END"
+    pp "SysMessageChannel::speak() END"
   end
 end

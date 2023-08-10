@@ -13,27 +13,11 @@
         </a>
       </div>
     </div>
-    <div
-      style="display: flex;flex-wrap: wrap;flex: 1 1 auto;"
-    >
-      <input
-        v-model="message"
-        style="border: solid 1px; font-size: 13px; width: 100％;"
-        placeholder="メッセージ"
-        required
-      />
-      <v-btn
-        color="primary"
-        class="mb-1 mr-1"
-        @click="send"
-      >
-        送信
-      </v-btn>
-    </div>
 
     <div>
       <div
-        v-for="message in messageList"
+        v-for="(item, message) in messageList"
+        :key="index"
       >
         {{ message }}<br>
       </div>
@@ -50,6 +34,8 @@
 
 <script>
 import ActionCable from 'actioncable';
+import {mapState} from 'vuex';
+
 export default({
   data: function () {
     return {
@@ -68,17 +54,10 @@ export default({
       };
     });
   },
-  created() {
-    const websocketUrl = `${process.env.WS_BASE_URL}/cable`;
-    this.cable = ActionCable.createConsumer(websocketUrl);
+  // computed: {
+  //   ...mapState(['messageList'])
+  // },
 
-    this.chatChannel = this.cable.subscriptions.create( "ChatChannel",{
-      received: (data) => {
-        console.log("created() data:" + JSON.stringify(data));
-        this.messageList.push(data);
-      },
-    });
-  },
   methods: {
     async logout() {
       await this.$auth.logout()
@@ -94,14 +73,11 @@ export default({
     toLogin() {
       this.$router.push("/login");
     },
-    send() {
-      console.log("this.message:" + JSON.stringify(this.message));
-      this.chatChannel.perform('speak', {
-        message: this.message,
-        name: this.$auth.user.nickname,
-      });
-      this.message = "";
-    },
+    // send() {
+    //   console.log("this.message:" + JSON.stringify(this.message));
+    //   this.$nuxt.$emit('updateHeader', this.message);
+    //   this.message = "";
+    // },
   },
 })
 </script>

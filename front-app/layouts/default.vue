@@ -101,22 +101,25 @@ export default {
     const websocketUrl = `${process.env.WS_BASE_URL}/cable`;
     this.cable = ActionCable.createConsumer(websocketUrl);
 
-    this.chatChannel = this.cable.subscriptions.create( "ChatChannel",{
+    this.chatChannel = this.cable.subscriptions.create( "SysMessageChannel",{
       received: (data) => {
         this.messageList.push(data);
       },
     });
+    this.setListener();
   },
   methods: {
+    setListener() {
+      // emitで発火させたイベント名にする
+      this.$nuxt.$on('updateHeader', this.sendMessage)
+    },
     sendMessage(message) {
       console.log("sentMessage() message  :" + JSON.stringify(message));
-      const speak = () => {
-        // performの第二引数でサーバー側の関数の引数を設定できる
-        this.chatChannel.perform('speak', {
-          message: message,
-          name: this.$auth.user.nickname,
-        })
-      }
+      // performの第二引数でサーバー側の関数の引数を設定できる
+      this.chatChannel.perform('speak', {
+        message: message,
+        name: this.$auth.user.nickname,
+      });
     },
   }
 }

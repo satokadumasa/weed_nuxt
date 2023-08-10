@@ -3,15 +3,16 @@ module ApplicationCable
     identified_by :current_user
 
     def connect
-      self.current_user = find_verified_user!
+      # self.current_user = find_verified_user
+      code = cookies.encrypted[:cable]
+      self.current_user = User.find_by(code: code) if code.present?
     end
 
     private
-
-    def find_verified_user!
-      # 本来はcookieなどを使い接続してきたクラウアントのユーザーを検索するが
-      # 今回は動作確認したいだけなのでランダムでユーザーを1人返す
-      User.all.sample
-    end
+      def find_verified_user
+        # 本来はcookieなどを使い接続してきたクラウアントのユーザーを検索するが
+        # 今回は動作確認したいだけなのでランダムでユーザーを1人返す
+        User.all.sample
+      end
   end
 end
