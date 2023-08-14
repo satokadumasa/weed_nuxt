@@ -13,7 +13,6 @@
         </a>
       </div>
     </div>
-
     <div>
       <div
         v-for="(item, message) in messageList"

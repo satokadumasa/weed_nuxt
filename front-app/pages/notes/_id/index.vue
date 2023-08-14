@@ -20,6 +20,12 @@
           <h3>■本文</h3>
           {{ note.detail }}
         </div>
+        <v-btn
+          :disabled="!this.$auth.loggedIn"
+          @click="bookmark(note.id)"
+        >
+          <img src="/img/bookmark-svgrepo-com.svg" style="width: 20px; height: 20px;">
+        </v-btn>
       </v-row>
     </div>
     <div>
@@ -137,6 +143,19 @@ export default {
     },
     setPages(pages) {
       this.pages = pages;
+    },
+    bookmark() {
+      this.$store.dispatch(
+          "notes/asyncNoteBookmarkCreate", 
+          {
+            note_id: $nuxt.$route.params.id,
+            user_id: this.$auth.user.id
+          }
+      ).then((response) => {
+        alert(`「${this.note.title}」をブックマークしました。`);
+      }).catch(e => {
+        alert(`「${this.note.title}」はブックマーク済みです。`);
+      });
     },
   },
 }

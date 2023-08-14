@@ -154,4 +154,12 @@ export const actions = {
           return response;
         });
     },
+    asyncBoardBookmarkCreate({ commit }, params) {
+      console.log("asyncBoardBookmarkCreate() params:" + JSON.stringify(params));
+      return this.$axios
+        .$post("/board_bookmarks/", params)
+        .then((response) => {
+          return response;
+        });
+    },
 };  

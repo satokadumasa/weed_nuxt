@@ -244,4 +244,12 @@ export const actions = {
                 return response;
             });
     },
+    asyncNoteBookmarkCreate({ commit }, params) {
+      console.log("asyncNoteBookmarkCreate() params:" + JSON.stringify(params));
+      return this.$axios
+        .$post("/note_bookmarks/", params)
+        .then((response) => {
+          return response;
+        });
+    },
 };

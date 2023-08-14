@@ -13,6 +13,12 @@
         >{{ board.detail }}
         </div>
       </v-row>
+      <v-btn
+        :disabled="!this.$auth.loggedIn"
+        @click="bookmark()"
+      >
+        <img src="/img/bookmark-svgrepo-com.svg" style="width: 20px; height: 20px;">
+      </v-btn>
     </div>
     <div>
       <hr></hr>
@@ -96,7 +102,6 @@ export default {
       board_comments: "boards/board_comments",
     }),
   },
-
   methods: {
     boardList() {
       this.$router.push('/boards/');
@@ -124,8 +129,21 @@ export default {
 
     boardUpdate() {
       console.log("boardUpdate() board_id:" + $nuxt.$route.params.id);
-      this.$router.push('/boards/edit/' + $nuxt.$route.params.id);
-    }
+      this.$router.push('/boards/' + $nuxt.$route.params.id + '/edit');
+    },
+    bookmark() {
+      this.$store.dispatch(
+          "boards/asyncBoardBookmarkCreate", 
+          {
+            board_id: $nuxt.$route.params.id,
+            user_id: this.$auth.user.id
+          }
+      ).then((response) => {
+        alert(`「${this.board.title}」をブックマークしました。`);
+      }).catch(e => {
+        alert(`「${this.board.title}」はブックマーク済みです。`);
+      });
+    },
   },
 }
 </script>

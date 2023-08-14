@@ -14,6 +14,16 @@ class User < ActiveRecord::Base
   has_many :roles, through: :user_roles
   has_many :boards
   has_many :board_comments, through: :boards
+  has_many :board_bookmarks
+  has_many :note_bookmarks
+  has_many :fav_boards, through: :board_bookmarks,source: :board
+  has_many :fav_notes, through: :note_bookmarks,source: :note
+  # フォローをした、されたの関係
+  has_many :relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
 
+  # 一覧画面で使う
+  has_many :followings, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_of_relationships, source: :follower
   # validates :nickname, uniqueness: true, presence: true
 end

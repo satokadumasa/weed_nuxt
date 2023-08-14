@@ -8,8 +8,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    pp "UsersController.show"
+    pp "UsersController.show()"
     @user = User.find(params[:id])
+    pp "UsersController.show() user:" << @user.inspect
     render json: @user
   end
 

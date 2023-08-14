@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  resources :follows
+  resources :note_bookmarks
   get 'home/index'
   resources :page_comments
+  resources :board_bookmarks
   resources :board_comments
   resources :boards
   resources :pages
