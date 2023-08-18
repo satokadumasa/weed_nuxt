@@ -58,10 +58,10 @@ export default {
     });
   },
   data: () => ({
-    user: {},
+    // user: {},
   }),
   created() {
-    console.log("created() user:" + JSON.stringify(this.user));
+    // console.log("created() user:" + JSON.stringify(this.user));
   },
   computed: {
     // ...mapGetters({

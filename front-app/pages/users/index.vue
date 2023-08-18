@@ -63,6 +63,7 @@ export default {
       page: !_.isEmpty(this.$nuxt.$route.query.page)
         ? parseInt(this.$nuxt.$route.query.page)
         : 1,
+
       per: !_.isEmpty(this.$nuxt.$route.query.per)
         ? parseInt(this.$nuxt.$route.query.per)
         : 10,

@@ -6,7 +6,12 @@
           {{ note.title }}
         </h1>
         <div>
-          [{{ note.user.nickname }}]({{ $moment(note.created_at).format('YYYY年MM月DD日 HH:m') }})
+          [
+            <a
+              :href="`/users/${note.user.id}`"
+            >{{ note.user.nickname }}</a>
+          ]
+          ({{ $moment(note.created_at).format('YYYY年MM月DD日 HH:m') }})
         </div>
         <div 
           style="width: 100%;overflow-wrap: break-word;display: inline-block;hite-space: pre-wrap;"
@@ -36,7 +41,12 @@
         >
           {{ page.title }}
         </a>
-        [{{ page.user.nickname }}]<br>
+        [
+            <a
+              :href="`/users/${page.user.id}`"
+            >{{ page.user.nickname }}</a>
+        ]
+        <br>
         {{ $moment(page.created_at).format('YYYY年MM月DD日 HH:m') }}<br>
         <hr></hr>
       </div>

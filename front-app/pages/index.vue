@@ -1,6 +1,8 @@
 <template>
   <div class="w-full">
-    ■Boards
+
+    ■更新情報<br>
+    ●Boards<br>
     <div
       v-for="board in boards" v-bind:key="boards.id"
       style="display: flex;flex-wrap: wrap;flex: 1 1 auto;"
@@ -10,6 +12,19 @@
           :href="`/boards/${board.id}`"
         >
           {{ board.title }}
+        </a>
+      </div>
+    </div>
+    ●Notes<br>
+    <div
+      v-for="note in notes" v-bind:key="notes.id"
+      style="display: flex;flex-wrap: wrap;flex: 1 1 auto;"
+    >
+      <div style="flex-basis: 0;flex-grow: 1;max-width: 100%;width: 100%;padding: 2px;">
+        <a 
+          :href="`/notes/${note.id}`"
+        >
+          {{ note.title }}
         </a>
       </div>
     </div>
@@ -23,10 +38,9 @@
     </div>
 
     <div style="position: fixed;bottom: 40px;display: flex;">
-      <v-btn v-if="!this.$auth.loggedIn" variant="primary" to="/signup">サインアップ</v-btn>
-      <v-btn v-if="!this.$auth.loggedIn" variant="info" @click="toLogin">ログイン</v-btn>
-      <v-btn v-if="this.$auth.loggedIn" variant="success" to="/update">アカウント情報</v-btn>
-      <v-btn v-if="this.$auth.loggedIn" variant="danger" @click="logout">ログアウト</v-btn>
+      <v-btn v-if="!this.$auth.loggedIn" variant="primary" to="/signup">SignUp</v-btn>
+      <v-btn v-if="!this.$auth.loggedIn" variant="info" @click="toLogin">Login</v-btn>
+      <v-btn v-if="this.$auth.loggedIn" variant="danger" @click="logout">Logout</v-btn>
     </div>
 </div>
 </template>
@@ -42,20 +56,21 @@ export default({
       messageList: [],
       cable: null,
       chatChannel: null,
+      // user_id: this.$auth.user.id,
     }
   },
   asyncData({ store, app, query }) {
     return Promise.all([
-      store.dispatch("boards/asyncBoards",{page: 1, per:5}),
+      store.dispatch("home/asynHome",{}),
+      // store.dispatch("boards/asyncBoards",{page: 1, per:5}),
+      // store.dispatch("notes/asyncNotes",{page: 1, per:5}),
     ]).then((response) => {
       return {
-        boards: _.cloneDeep(store.getters["boards/boards"]),
+        boards: _.cloneDeep(store.getters["home/boards"]),
+        notes: _.cloneDeep(store.getters["home/notes"]),
       };
     });
   },
-  // computed: {
-  //   ...mapState(['messageList'])
-  // },
 
   methods: {
     async logout() {
@@ -72,11 +87,6 @@ export default({
     toLogin() {
       this.$router.push("/login");
     },
-    // send() {
-    //   console.log("this.message:" + JSON.stringify(this.message));
-    //   this.$nuxt.$emit('updateHeader', this.message);
-    //   this.message = "";
-    // },
   },
 })
 </script>

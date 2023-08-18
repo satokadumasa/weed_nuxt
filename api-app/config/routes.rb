@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :follows
   resources :note_bookmarks
-  get 'home/index'
   resources :page_comments
   resources :board_bookmarks
   resources :board_comments
@@ -10,6 +9,7 @@ Rails.application.routes.draw do
   resources :notes
   resources :user_roles
   resources :roles
+  get 'home/index'
   get '/users/me', to: 'users#me'
   resources :users
 

@@ -6,7 +6,13 @@
           {{ board.title }}
         </h1>
         <div>
-          [{{ board.user.nickname }}]({{ $moment(board.created_at).format('YYYY年MM月DD日 HH:m') }})
+          [
+            <a
+              :href="`/users/${board.user.id}`"
+              >{{ board.user.nickname }}</a
+            >
+          ]
+          ({{ $moment(board.created_at).format('YYYY年MM月DD日 HH:m') }})
         </div>
         <div 
           style="width: 100%;overflow-wrap: break-word;display: inline-block;hite-space: pre-wrap;white-space: pre-wrap;"
@@ -23,7 +29,14 @@
     <div>
       <hr></hr>
       <div v-for="(board_comment, key) in board_comments" :key="key">
-        {{ board_comment.title }}[{{ board_comment.user.nickname }}]<br>
+        {{ board_comment.title }}
+        [
+          <a
+            :href="`/users/${board_comment.user.id}`"
+            >{{ board_comment.user.nickname }}</a
+          >
+        ]
+        <br>
         {{ $moment(board_comment.created_at).format('YYYY年MM月DD日 HH:m') }}<br>
         <div 
           style="width: 100%;overflow-wrap: break-word;display: inline-block;white-space: pre-wrap;"

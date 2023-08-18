@@ -70,24 +70,24 @@ export default {
       fixed: false,
       items: [
         {
-          // icon: 'mdi-apps',
+          icon: 'mdi-apps',
           title: 'Home',
           to: '/'
         },
         {
-          // icon: 'mdi-chart-bubble',
+          icon: 'mdi-view-dashboard',
           title: 'Boards',
           to: '/boards/'
         },
         {
-          // icon: 'mdi-chart-bubble',
+          icon: 'mdi-book-open-page-variant',
           title: 'Notes',
           to: '/notes/'
         },
         {
-          // icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'mdi-chart-bubble',
+          title: 'About',
+          to: '/about'
         },
       ],
       miniVariant: false,
@@ -114,8 +114,6 @@ export default {
       this.$nuxt.$on('updateHeader', this.sendMessage)
     },
     sendMessage(message) {
-      console.log("sentMessage() message  :" + JSON.stringify(message));
-      // performの第二引数でサーバー側の関数の引数を設定できる
       this.chatChannel.perform('speak', {
         message: message,
         name: this.$auth.user.nickname,
