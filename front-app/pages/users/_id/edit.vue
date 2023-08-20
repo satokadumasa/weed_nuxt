@@ -1,62 +1,40 @@
 <template>
   <v-app>
-    <h1>Note Edit</h1>
-    <table class="w-100">
-      <tr class="w-100">
-        <th class="w-25">
-          タイトル
-        </th>
-        <td class="w-75">
-          <input
-            v-model="form.title"
-            style="border: solid 1px; font-size: 13px; width: 1005;"
-            placeholder="タイトル"
-            required
-          />
-        </td>
-      </tr>
-      <tr>
-        <th style="">
-          説明
-        </th>
-        <td>
-          <textarea
-            v-model="form.overview"
-            name="input-7-1"
-            placeholder="説明"
-            style="border: solid 1px; font-size: 13px; width: 100%; height: 200px;"
-            required
-          />
-        </td>
-      </tr>
-      <tr>
-        <th style="">
-          本文
-        </th>
-        <td>
-          <textarea
-            v-model="form.detail"
-            name="input-7-1"
-            placeholder="本文"
-            style="border: solid 1px; font-size: 13px; width: 100%; height: 200px;"
-            required
-          />
-        </td>
-      </tr>
-    </table>
+    <h1>User Edit</h1>
+    <div style="width: 100%">
+      <div style="width: 100%">
+        <h3>Nickname</h3></h3>
+        <input
+          v-model="form.nickname"
+          style="border: solid 1px; font-size: 13px; width: 1005;"
+          placeholder="タイトル"
+          required
+        />
+      </div>
+      <div style="width: 100%">
+        <h3>Profile</h3></h3>
+        <textarea
+          v-model="form.self_introduction"
+          name="input-7-1"
+          placeholder="説明"
+          style="border: solid 1px; font-size: 13px; width: 100%; height: 300px;"
+          required
+        />
+      </div>
+    </div>
     <div style="position: fixed;bottom: 40px;display: flex;">
       <v-btn
         color="error"
         class="mb-1 mr-1"
-        @click="noteList"
+        @click="home"
       >
-        Note
+        Home
       </v-btn>
       <v-btn
         color="primary"
         class="mb-1 mr-1"
-        @click="updateNote"
-        :disabled="note.user.id != $auth.user.id"
+        @click="updateUser"
+        :disabled="user.id != $auth.user.id"
       >
         投稿
       </v-btn>
@@ -66,49 +44,48 @@
 
 <script>
 export default {
-  name: 'noteEdit',
-  data() {
+  name: 'userEdit',
+  data: () => {
     return {
       form: {
-        id: 0,
-        title: "",
-        overview: "",
-        detail: "",
+        id: $nuxt.$route.params.id,
+        nickname: "",
+        self_introduction: "",
       }
     }
   },
   asyncData({ store, app, query }) {
     console.log("asyncData() id:" + $nuxt.$route.params.id);
     return Promise.all([
-      store.dispatch("notes/asyncNote",{
+      store.dispatch("users/asyncUser",{
         id: !_.isEmpty($nuxt.$route.params.id) ? $nuxt.$route.params.id : 1
       }),
     ]).then((response) => {
       return {
-        note: _.cloneDeep(store.getters["notes/note"]),
-        note_comments: _.cloneDeep(store.getters["notes/note_comments"]),
+        user: _.cloneDeep(store.getters["users/user"]),
       };
     });
   },
   created() {
-    this.form = this.note;
+    this.form.nickname = this.user.nickname;
+    this.form.self_introduction = this.user.self_introduction;
   },
   methods: {
-    updateNote() {
-      console.log("uodateNote() user_id:" + $nuxt.$route.params.id);
-      this.form.id = $nuxt.$route.params.id;
-      console.log("pagination() this.form:" + JSON.stringify(this.form));
+    updateUser() {
+      console.log("updateUser() user_id:" + $nuxt.$route.params.id);
+      // this.form.id = $nuxt.$route.params.id;
+      console.log("updateUser() this.form:" + JSON.stringify(this.form));
       this.$store.dispatch(
-          "notes/asyncNoteUpdate", 
+          "users/asyncUserUpdate", 
           this.form
       ).then((response) => {
-          alert("ボード：" + this.form.title + "を更新しました。");
-          this.$router.push('/notes/');
+          alert(this.form.nickname + "さん、ユーザ情報を更新しました。");
+          this.$router.push('/users/');
       })
     },
-    noteList() {
-      console.log("noteList()");
-      this.$router.push('/notes/');
+    home() {
+      console.log("home()");
+      this.$router.push('/');
     },
   }
 }

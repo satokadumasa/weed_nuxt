@@ -16,46 +16,56 @@
           <li :class="{ clickBtn: tab === 1 }" @click="tab = 1">フォロー中</li>
           <li :class="{ clickBtn: tab === 2 }" @click="tab = 2">フォロワー</li></li>
         </ul>
-      <div class="content">
-        <div v-show="tab === 1" class="content-item">
-          <p>フォロー中</p></p>
-          <table>
-            <tbody>
-              <tr v-for="following in followings" v-bind:key="following.id">
-                <td>
-                  {{ following.nickname }}
-                </td>
-                <td>
-                  <v-btn
-                    @click="remove(following)"
-                  >
-                    <img src="/img/bookmark-svgrepo-com.svg" style="width: 20px; height: 20px;">
-                  </v-btn>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="content">
+          <div v-show="tab === 1" class="content-item">
+            <p>フォロー中</p></p>
+            <table>
+              <tbody>
+                <tr v-for="following in followings" v-bind:key="following.id">
+                  <td>
+                    <a
+                      :href="`/users/${following.id}`"
+                      style="text-decoration:none"
+                    >
+                      {{ following.nickname }}
+                    </a>
+                  </td>
+                  <td>
+                    <v-btn
+                      @click="remove(following)"
+                      style="text-decoration:none"
+                    >
+                      <img src="/img/bookmark-svgrepo-com.svg" style="width: 20px; height: 20px;">
+                    </v-btn>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div v-show="tab === 2" class="content-item">
+            <p>フォローワー</p>
+            <table>
+              <tbody>
+                <tr v-for="follower in followers" v-bind:key="follower.id">
+                  <td>
+                    <a
+                      :href="`/users/${follower.id}`"
+                    >
+                      {{ follower.nickname }}
+                    </a>
+                  </td>
+                  <td>
+                    <v-btn
+                      @click="remove2(follower)"
+                    >
+                      <img src="/img/bookmark-svgrepo-com.svg" style="width: 20px; height: 20px;">
+                    </v-btn>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div v-show="tab === 2" class="content-item">
-          <p>フォローワー</p>
-          <table>
-            <tbody>
-              <tr v-for="follower in followers" v-bind:key="follower.id">
-                <td>
-                  {{ follower.nickname }}
-                </td>
-                <td>
-                  <v-btn
-                    @click="remove2(follower)"
-                  >
-                    <img src="/img/bookmark-svgrepo-com.svg" style="width: 20px; height: 20px;">
-                  </v-btn>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
 
 
       </v-row>
@@ -100,6 +110,9 @@ export default {
     });
   },
   methods: {
+    userView(user_id) {
+      this.$router.push(`/users/${user_id}`);
+    },
     follow() {
       this.$store.dispatch(
           "users/asyncFollowCreate", 
@@ -112,6 +125,9 @@ export default {
       }).catch(e => {
         alert(`「${this.user.nickname}」はフォロー済みです。`);
       });
+    },
+    userUpdate() {
+      this.$router.push(`/users/${this.$auth.user.id}/edit`);
     },
     remove(user) {
       this.$store.dispatch(
@@ -174,6 +190,6 @@ li {
 }
 .clickBtn {
   width: 100%;
-  background-color: rgb(168, 168, 168);
+  background-color: rgb(0, 168, 168);
 }
 </style>

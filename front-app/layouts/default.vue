@@ -89,6 +89,11 @@ export default {
           title: 'About',
           to: '/about'
         },
+        {
+          icon: 'mdi-account',
+          title: 'Profile',
+          to: '/profile'
+        },
       ],
       miniVariant: false,
       right: true,

@@ -18,20 +18,50 @@
         >
           <img src="/img/bookmark-svgrepo-com.svg" style="width: 20px; height: 20px;">
         </v-btn>
+        <hr></hr>
+        <ul>
+          <li :class="{ clickBtn: tab === 1 }" @click="tab = 1">フォロー中</li>
+          <li :class="{ clickBtn: tab === 2 }" @click="tab = 2">フォロワー</li></li>
+        </ul>
+        <div class="content">
+          <div v-show="tab === 1" class="content-item">
+            <p>フォロー中</p></p>
+            <table>
+              <tbody>
+                <tr v-for="following in followings" v-bind:key="following.id">
+                  <td>
+                    <a
+                      :href="`/users/${following.id}`"
+                      style="text-decoration:none"
+                    >
+                      {{ following.nickname }}
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div v-show="tab === 2" class="content-item">
+            <p>フォローワー</p>
+            <table>
+              <tbody>
+                <tr v-for="follower in followers" v-bind:key="follower.id">
+                  <td>
+                    <a
+                      :href="`/users/${follower.id}`"
+                      style="text-decoration:none"
+                    >
+                      {{ follower.nickname }}
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </v-row>
     </div>
     <br>
-    <div style="position: fixed;bottom: 40px;display: flex;">
-      <v-btn
-        color="primary"
-        class="mb-1 mr-1"
-        @click="userUpdate"
-        :disabled="user.id != $auth.user.id"
-      >
-        Edit
-      </v-btn>
-    </div>
-
   </div>
 </template>
 <script>
@@ -44,6 +74,11 @@ export default {
   components: {
     PageCreate,
   },
+  data: () => {
+    return {
+      tab: 1,
+    }
+  },
   asyncData({ store, app, query }) {
     console.log("asyncData() id:" + $nuxt.$route.params.id);
     return Promise.all([
@@ -53,22 +88,24 @@ export default {
     ]).then((response) => {
       return {
         user: _.cloneDeep(store.getters["users/user"]),
+        followers: _.cloneDeep(store.getters["users/followers"]),
+        followings: _.cloneDeep(store.getters["users/followings"]),
       };
     });
   },
   methods: {
-    user() {
-      this.$store.dispatch(
-          "users/asyncUser", 
-          {
-            id: $nuxt.$route.params.id,
-          }
-      ).then((response) => {
-        this.user = response;
-      });
-    },
-    userUpdate() {
-
+    // user() {
+    //   this.$store.dispatch(
+    //       "users/asyncUser", 
+    //       {
+    //         id: $nuxt.$route.params.id,
+    //       }
+    //   ).then((response) => {
+    //     this.user = response;
+    //   });
+    // },
+    userView(user_id) {
+      this.$router.push(`/users/${user_id}`);
     },
     follow() {
       this.$store.dispatch(
@@ -86,3 +123,29 @@ export default {
   },
 }
 </script>
+<style scoped>
+ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  text-align: center;
+}
+li {
+  background-color: gray;
+  color: white;
+  width: 100%;
+  heightmin: 50px;
+  border: 1px solid white;
+  padding: 10px;
+}
+.content {
+  margin-left: 10px;
+  width: 100%;
+  height-min: 200px;
+  background-color: rgb(255, 255, 255);
+}
+.clickBtn {
+  width: 100%;
+  background-color: rgb(0, 168, 168);
+}
+</style>

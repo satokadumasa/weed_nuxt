@@ -33,4 +33,26 @@ class UsersController < ApplicationController
     @user = current_user
     render json: {data: @user}
   end
+
+  # PATCH/PUT /boards/1
+  def update
+    @user = User.find(params[:id])
+    pp "UsersController.update() user:" << @user.inspect
+    if @user.update(user_params)
+      render json: {user: @user}
+    else
+      render json: @board.errors, status: :unprocessable_entity
+    end
+  end
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_board
+      board = Board.eager_load(:user).find(params[:id])
+      @board = board.as_json(:include => :user)
+    end
+
+    # Only allow a list of trusted parameters through.
+    def user_params
+      params.permit(:id, :nickname, :self_introduction)
+    end
 end

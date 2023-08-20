@@ -51,6 +51,16 @@ export const actions = {
           return response;
         });
     },
+    asyncUserUpdate({ commit }, params) {
+      console.log("asyncBoardUpdate() params:" + JSON.stringify(params));
+      return this.$axios
+        .$put("/users/" + params.id , params)
+        .then((response) => {
+          console.log("asyncBoardCommentCreate() response:" + JSON.stringify(response));
+          commit("SET_USER", response.user);
+          return response;
+        });
+    },
     asyncUser({ commit }, params) {
       console.log("asyncUser() params:" + JSON.stringify(params));
       return this.$axios
