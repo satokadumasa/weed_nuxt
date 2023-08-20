@@ -62,8 +62,6 @@ export default({
   asyncData({ store, app, query }) {
     return Promise.all([
       store.dispatch("home/asynHome",{}),
-      // store.dispatch("boards/asyncBoards",{page: 1, per:5}),
-      // store.dispatch("notes/asyncNotes",{page: 1, per:5}),
     ]).then((response) => {
       return {
         boards: _.cloneDeep(store.getters["home/boards"]),

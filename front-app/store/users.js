@@ -1,5 +1,7 @@
 export const state = () => ({
     user: {},
+    followers: [],
+    followings: [],
 });
 export const mutations = {
   /**
@@ -10,10 +12,22 @@ export const mutations = {
   SET_USER(state, payLoad) {
     state.user = payLoad;
   },
+  SET_FOLLOWERS(state, payLoad) {
+    state.followers = payLoad;
+  },
+  SET_FOLLOWINGS(state, payLoad) {
+    state.followings = payLoad;
+  },
 };
 export const getters = {
   user: (state) => {
       return state.user;
+  },
+  followers: (state) => {
+    return state.followers;
+  },
+  followings: (state) => {
+    return state.followings;
   },
 };
 export const actions = {
@@ -43,7 +57,9 @@ export const actions = {
         .$get("/users/" + params.id)
         .then((response) => {
           console.log("asyncUser() response:" + JSON.stringify(response));
-          commit("SET_USER", response);
+          commit("SET_USER", response.user);
+          commit("SET_FOLLOWERS", response.followers);
+          commit("SET_FOLLOWINGS", response.followings);
           return response;
         });
     },
@@ -51,6 +67,14 @@ export const actions = {
       console.log("asyncFollowCreate() params:" + JSON.stringify(params));
       return this.$axios
         .$post("/follows/", params)
+        .then((response) => {
+          return response;
+        });
+    },
+    asyncFollowDestroy({ commit }, params) {
+      console.log("asyncFollowCreate() params:" + JSON.stringify(params));
+      return this.$axios
+        .$post("/users/remove/", params)
         .then((response) => {
           return response;
         });

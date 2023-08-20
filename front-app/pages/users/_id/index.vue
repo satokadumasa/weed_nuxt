@@ -51,22 +51,10 @@ export default {
         id: !_.isEmpty($nuxt.$route.params.id) ? $nuxt.$route.params.id : 1
       }),
     ]).then((response) => {
-      // console.log("asyncData() response:" + JSON.stringify(response));
       return {
         user: _.cloneDeep(store.getters["users/user"]),
       };
     });
-  },
-  data: () => ({
-    // user: {},
-  }),
-  created() {
-    // console.log("created() user:" + JSON.stringify(this.user));
-  },
-  computed: {
-    // ...mapGetters({
-    //   user: "users/user",
-    // }),
   },
   methods: {
     user() {

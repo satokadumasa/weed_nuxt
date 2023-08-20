@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :user_roles
   resources :roles
   get 'home/index'
+  post '/users/remove', to: 'users#remove'
   get '/users/me', to: 'users#me'
   resources :users
 

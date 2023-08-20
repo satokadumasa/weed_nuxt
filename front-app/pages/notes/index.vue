@@ -1,7 +1,13 @@
 <template>
   <v-app>
-    <table class="list">
-      <h1>Note List</h1>
+    <h1>Note List</h1>
+    <v-pagination
+      v-model="page"
+      :length="max_page"
+      :total-visible="10"
+      @input="pagination()"
+    ></v-pagination>
+    <table class="list" style="margin-left: 20px;">
       <tbody>
         <tr class="altrow" v-for="note in notes" v-bind:key="notes.id">
           <td>
