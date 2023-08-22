@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :whispers
+  resources :user_rooms
+  resources :rooms
   resources :follows
   resources :note_bookmarks
   resources :page_comments

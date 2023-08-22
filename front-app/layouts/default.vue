@@ -85,6 +85,11 @@ export default {
           to: '/notes/'
         },
         {
+          icon: 'mdi-cast',
+          title: 'Rooms',
+          to: '/rooms/'
+        },
+        {
           icon: 'mdi-chart-bubble',
           title: 'About',
           to: '/about'
