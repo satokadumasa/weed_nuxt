@@ -26,10 +26,6 @@ export const getters = {
     },
     messageList: (state) => {
         console.log("state:" + JSON.stringify(state));
-        // let messages = [];
-        // state.messageList.array.forEach(element => {
-            
-        // });
         return state.messageList;
     },
 };

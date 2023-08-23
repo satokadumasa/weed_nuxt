@@ -82,9 +82,9 @@ export default {
   created() {
     const websocketUrl = `${process.env.WS_BASE_URL}/cable`;
     this.cable = ActionCable.createConsumer(websocketUrl);
-
+    console.log("created() user:" + JSON.stringify(this.$auth.user));
     this.chatChannel = this.cable.subscriptions.create(
-      {channel: "ChatChannel", room: this.room.id},
+      {channel: "ChatChannel", room: this.room.id, user_id: this.$auth.user.id},
       {received: (response) => {
           console.log("response:" + JSON.stringify(response));
           this.$store.commit("addMessage", response);
@@ -103,12 +103,15 @@ export default {
     },
     sendMessage() {
       console.log("sendMessage()");
-      this.chatChannel.perform('speak', {
-        sender: this.$auth.user.nickname,
-        username: this.$auth.user.nickname,
-        user_id: this.$auth.user.id,
-        message:this.form.message,
-      });
+      if(!_.isEmpty(this.form.message)) {
+        this.chatChannel.perform('speak', {
+          sender: this.$auth.user.nickname,
+          username: this.$auth.user.nickname,
+          user_id: this.$auth.user.id,
+          message:this.form.message,
+        });
+        this.form.message = "";
+      }
     },
   },
 }

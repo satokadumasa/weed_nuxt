@@ -79,6 +79,7 @@ export default {
     baseURL: process.env.API_URL,
     proxyHeaders: false,
     credentials: false,
+    // credentials: true,
     proxy: false
   },
   router: {
