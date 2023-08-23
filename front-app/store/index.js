@@ -12,7 +12,12 @@ export const mutations = {
     addMessage(state, messageText) {
         console.log("addMessage() state:" + JSON.stringify(state));
         console.log("addMessage() messageText:" + JSON.stringify(messageText));
-        state.messageList.push({sender: messageText.sender, message: messageText.message})
+        let messageList = state.messageList;
+        state.messageList = []
+        state.messageList.push({sender: messageText.sender, user_id: messageText.user_id, username: messageText.username, message: messageText.message, now: messageText.now})
+        messageList.forEach(element => {
+            state.messageList.push(element);
+        });
     }
 }
 export const getters = {
@@ -21,6 +26,10 @@ export const getters = {
     },
     messageList: (state) => {
         console.log("state:" + JSON.stringify(state));
+        // let messages = [];
+        // state.messageList.array.forEach(element => {
+            
+        // });
         return state.messageList;
     },
 };

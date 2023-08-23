@@ -10,23 +10,12 @@
         >{{ room.overview }}
         </div>
       </v-row>
-      <input
-        v-model="form.message"
-        style="border: solid 1px; font-size: 13px; width: 1005;"
-        placeholder="タイトル"
-        required
-      />
-      <v-btn
-        :disabled="!this.$auth.loggedIn"
-        @click="sendMessage()"
-      >
-        <img src="/img/bookmark-svgrepo-com.svg" style="width: 20px; height: 20px;">
-      </v-btn>
     </div>
     <div>
       <hr></hr>
       <div v-for="(message, key) in messageList" :key="key">
         {{ message.sender }}
+        [{{ message.now }}]
         <br>
         <div 
           style="width: 100%;overflow-wrap: break-word;display: inline-block;white-space: pre-wrap;"
@@ -38,12 +27,17 @@
     </div>
     <br>
     <div style="position: fixed;bottom: 40px;display: flex;">
+      <input
+        v-model="form.message"
+        style="border: solid 1px; font-size: 13px; width: 100%;"
+        placeholder="タイトル"
+        required
+      />
       <v-btn
-        color="primary"
-        class="mb-1 mr-1"
-        @click="home"
+        :disabled="!this.$auth.loggedIn"
+        @click="sendMessage()"
       >
-        Home
+        <img src="/img/bookmark-svgrepo-com.svg" style="width: 20px; height: 20px;">
       </v-btn>
     </div>
 
@@ -79,6 +73,8 @@ export default {
       body: "",
       form: {
         sender: "",
+        username: "",
+        user_id: "",
         message: "",
       }
     };
@@ -108,8 +104,10 @@ export default {
     sendMessage() {
       console.log("sendMessage()");
       this.chatChannel.perform('speak', {
-        message:this.form.message,
         sender: this.$auth.user.nickname,
+        username: this.$auth.user.nickname,
+        user_id: this.$auth.user.id,
+        message:this.form.message,
       });
     },
   },
