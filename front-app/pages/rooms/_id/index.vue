@@ -26,18 +26,18 @@
       <hr></hr>
     </div>
     <br>
-    <div style="position: fixed;bottom: 40px;display: flex;">
+    <div style="position: fixed;bottom: 40px;display: flex; background-color: white;">
       <input
         v-model="form.message"
-        style="border: solid 1px; font-size: 13px; width: 100%;"
-        placeholder="タイトル"
+        style="border: solid 1px; font-size: 13px; width: 250px;"
+        placeholder="発言"
         required
       />
       <v-btn
         :disabled="!this.$auth.loggedIn"
         @click="sendMessage()"
       >
-        <img src="/img/bookmark-svgrepo-com.svg" style="width: 20px; height: 20px;">
+        <img src="/img/comment-1-svgrepo-com.svg" style="width: 20px; height: 20px;">
       </v-btn>
     </div>
 
@@ -105,7 +105,6 @@ export default {
       console.log("sendMessage()");
       if(!_.isEmpty(this.form.message)) {
         this.chatChannel.perform('speak', {
-          sender: this.$auth.user.nickname,
           username: this.$auth.user.nickname,
           user_id: this.$auth.user.id,
           message:this.form.message,
