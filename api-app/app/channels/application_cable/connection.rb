@@ -4,9 +4,9 @@ module ApplicationCable
 
     def connect
       # code = cookies.encrypted[:cable]
-      # pp "Connection::connect() code:" << code.inspect
+      # pp "Connection::connect() cookies:" << cookies.inspect
       # self.current_user = User.find_by(code: code) if code.present?
-      # pp "Connection::connect() params:" << params.inspect
+      # pp "Connection::connect() params:" << self.current_user.inspect
 
       # self.current_user = find_verified_user
       # pp "Connection::connect() current_user:" << self.current_user.inspect
