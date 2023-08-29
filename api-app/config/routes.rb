@@ -18,12 +18,18 @@ Rails.application.routes.draw do
   get '/users/me', to: 'users#me'
   resources :users
 
+  # mount_devise_token_auth_for 'User', at: 'auth', skip: [:registrations]
+
+  mount_devise_token_auth_for 'Admin', at: 'admin'
+  as :admin do
+    # Define routes for Admin within this block.
+  end
+
   mount_devise_token_auth_for "User", at: "auth", controllers: {
     registrations: "auth/registrations",
     sessions: "auth/sessions",
   }
 
-  # mount_devise_token_auth_for 'User', at: 'auth', skip: [:registrations]
   devise_scope :user do
     post '/account/sign_up' => 'devise_token_auth/registrations#create'
     put '/account' => 'devise_token_auth/registrations#create'

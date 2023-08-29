@@ -9,6 +9,9 @@
 User.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ')
 User.create(email: 'operator@example.com', uid: 'operator@example.com',password: 'password',nickname: 'オペレータ')
 
+#admin
+Admin.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ')
+
 # Role
 Role.create(name: 'admin')
 Role.create(name: 'operator')
