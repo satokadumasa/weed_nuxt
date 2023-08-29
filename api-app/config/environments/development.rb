@@ -84,7 +84,7 @@ Rails.application.configure do
   # onfig.middleware.delete ActionDispatch::HostAuthorization
   config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins [ENV['WEED_API_ORIGIN_URL1']]
+      origins [ENV['WEED_API_ORIGIN_URL1'],ENV['WEED_API_ORIGIN_URL2']]
       # origins '*'
       resource '*',
                headers: :any,

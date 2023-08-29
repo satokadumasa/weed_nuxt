@@ -14,4 +14,10 @@ class Auth::SessionsController < DeviseTokenAuth::SessionsController
             'csrfToken' => form_authenticity_token
         }
     end
+    # def render_create_success
+    #     pp "Auth::SessionsController::render_create_success"
+    #     render json: {
+    #       data: resource_data(resource_json: @resource.token_validation_response)
+    #     }, scope: :current_user
+    # end
 end

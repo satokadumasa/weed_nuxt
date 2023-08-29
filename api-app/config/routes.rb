@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post '/users/remove', to: 'users#remove'
   put '/users/update', to: 'users#update'
   get '/users/me', to: 'users#me'
+  get '/admins/me', to: 'admins#me'
   resources :users
 
   # mount_devise_token_auth_for 'User', at: 'auth', skip: [:registrations]

@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  before_action :authenticate_user!
+class AdminsController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     pp "UsersController.index"
@@ -29,9 +29,9 @@ class UsersController < ApplicationController
   end
 
   def me
-    pp "UsersController.me"
-    pp "current_user:" << current_user.inspect
-    @user = current_user
+    pp "AdminController.me"
+    pp "current_admin:" << current_admin.inspect
+    @user = current_admin
     render json: {data: @user}
   end
 
