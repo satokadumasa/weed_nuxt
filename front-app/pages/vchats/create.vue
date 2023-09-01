@@ -64,16 +64,16 @@ export default {
     createvchat() {
       console.log("pagination() this.form:" + JSON.stringify(this.form));
       this.$store.dispatch(
-          "chat/asyncvchatCreate", 
+          "vchats/asyncvchatCreate", 
           this.form
       ).then((response) => {
           alert("vchat：" + this.form.name + "を作成しました。");
-          this.$router.push('/vchat/');
+          this.$router.push('/vchats/');
       })
     },
     vchatList() {
       console.log("boardList()");
-      this.$router.push('/vchat/');
+      this.$router.push('/vchats/');
     },
   }
 }

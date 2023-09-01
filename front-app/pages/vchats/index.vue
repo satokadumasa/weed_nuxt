@@ -52,14 +52,14 @@ export default {
   name: 'InspirePage',
   asyncData({ store, app, query }) {
     return Promise.all([
-      store.dispatch("chat/asyncvchats",{
+      store.dispatch("vchats/asyncVchats",{
         page: query.page,
         per: query.per,
       }),
     ]).then((response) => {
       return {
-        vchats: _.cloneDeep(store.getters["chat/vchats"]),
-        max_page: _.cloneDeep(store.getters["chat/max_page"]),
+        vchats: _.cloneDeep(store.getters["vchats/vchats"]),
+        max_page: _.cloneDeep(store.getters["vchats/max_page"]),
       };
     });
   },
@@ -104,16 +104,16 @@ export default {
       if (_.isEmpty(this.per)) {
         this.searchform.per = this.per;
       }
-      console.log("pagination() this.searchform:" + JSON.stringify(this.searchform));
       
       const query = this.filledValues(this.searchform);
       const VM = this;
       this.$store
-        .dispatch("chat/asyncvchats", this.searchform)
+        .dispatch("vchats/asyncvchats", this.searchform)
         .then((resposne) => {
+          console.log("pagination() resposne:" + JSON.stringify(resposne));
           this.$router.push({ query: query });
           this.boards = _.cloneDeep(
-            VM.$store.getters["chat/vchats"]
+            VM.$store.getters["vchats/vchats"]
           );
         });
     },

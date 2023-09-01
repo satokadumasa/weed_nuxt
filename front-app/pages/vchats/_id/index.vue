@@ -35,9 +35,13 @@ import _ from "lodash";
 import { mapGetters } from "vuex";
 import BoardComment from "~/components/boards/BoardComment";
 import ActionCable from 'actioncable';
+import JitsiMeetExternalAPI from '~/mixins//external_api.js';
 
 export default {
   name: 'vchats',
+  // components: {
+  //   JitsiMeetExternalAPI,
+  // },
   asyncData({ store, app, query }) {
     console.log("asyncData() id:" + $nuxt.$route.params.id);
     return Promise.all([
@@ -49,6 +53,17 @@ export default {
         vchat: _.cloneDeep(store.getters["vchats/vchat"]),
       };
     });
+  },
+  mounted() {
+      const domain = 'jitsi.september-rain.com'; // Jitsi用に使用しているドメイン名
+      const options = {
+        roomName: this.vchat.name, // チャットルーム名
+        width: 700, // ビデオチャット表示部分の幅
+        height: 700, // ビデオチャット表示部分の高さ
+        parentNode: document.querySelector('#meet') // ビデオチャットを表示する要素のID
+      };
+      const api = new JitsiMeetExternalAPI(domain, options);
+  		api.executeCommand('displayName', this.$auth.user.nickname); // ニックネーム（表示名）を指定する
   },
   data() {
     console.log("data()");

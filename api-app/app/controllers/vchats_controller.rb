@@ -46,6 +46,6 @@ class VchatsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def vchat_params
-      params.require(:vchat).permit(:name, :user_id, :orverview)
+      params.permit(:name, :user_id, :orverview)
     end
 end

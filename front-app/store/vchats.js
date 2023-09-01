@@ -10,10 +10,10 @@ export const mutations = {
    * @param {*} state
    * @param {*} payLoad
    */
-  SET_vchatS(state, payLoad) {
+  SET_VCHATS(state, payLoad) {
     state.vchats = payLoad;
   },
-  SET_vchat(state, payLoad) {
+  SET_VCHAT(state, payLoad) {
     state.vchat = payLoad;
   },
   SET_MAX_PAGE(state, payLoad) {
@@ -43,7 +43,7 @@ export const actions = {
    * @param {*} param0
    * @param {*} params
    */
-  asyncvchats({ commit }, params) {
+  asyncVchats({ commit }, params) {
     console.log("asyncvchats() params:" + JSON.stringify(params));
     let searchData = "";
     _.each(params, (value, key) => {
@@ -58,7 +58,7 @@ export const actions = {
     return this.$axios
       .$get("/vchats/?page=" + params.page + searchData)
       .then((response) => {
-        commit("SET_vchatS", response.vchats);
+        commit("SET_VCHATS", response.vchats);
         commit("SET_MAX_PAGE", response.max_page);
         commit("SET_COUNT", response.count);
         return response;
@@ -70,7 +70,7 @@ export const actions = {
       .$get("/vchats/" + params.id)
       .then((response) => {
         console.log("asyncvchat() response:" + JSON.stringify(response));
-        commit("SET_vchat", response);
+        commit("SET_VCHAT", response);
         return response;
       });
   },
@@ -79,7 +79,7 @@ export const actions = {
     return this.$axios
       .$post("/vchats/", params)
       .then((response) => {
-        commit("SET_vchatS", response.vchats);
+        commit("SET_VCHATS", response.vchats);
         return response;
       });
   },
