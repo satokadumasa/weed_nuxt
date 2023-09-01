@@ -1,0 +1,2 @@
+class Vchat < ApplicationRecord
+end

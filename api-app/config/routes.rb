@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :vchats
   resources :whispers
   resources :user_rooms
   resources :rooms
