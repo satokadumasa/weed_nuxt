@@ -27,10 +27,10 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - app-admin-front',
-    title: 'app-admin-front',
+    titleTemplate: '%s',
+    title: process.env.SITE_NAME,
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },

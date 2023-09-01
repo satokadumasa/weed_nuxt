@@ -31,7 +31,7 @@ export default {
     titleTemplate: '%s',
     title: process.env.SITE_NAME,
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
