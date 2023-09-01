@@ -48,6 +48,7 @@
 <script>
 import ActionCable from 'actioncable';
 import {mapState} from 'vuex';
+import _ from "lodash";
 
 export default({
   data: function () {
