@@ -47,7 +47,6 @@ Rails.application.configure do
   config.action_cable.allowed_request_origins = '*'
   config.action_cable.disable_request_forgery_protection = true
   config.hosts << "api.september-rain.com"
-  config.hosts << "weed_api.example.com"
   # config.hosts << "api.september-rain.com"
   # Use a different logger for distributed setups.
   # require "syslog/logger"
@@ -90,7 +89,8 @@ Rails.application.configure do
   config.middleware.insert_before 0, Rack::Cors do
     allow do
       # origins ENV['WEED_API_ORIGIN_URL1']
-      origins [ENV['WEED_API_ORIGIN_URL1'],ENV['WEED_API_ORIGIN_URL2']]
+      # origins [ENV['WEED_API_ORIGIN_URL1'],ENV['WEED_API_ORIGIN_URL2']]
+      origins '*'
       resource '*',
                headers: :any,
                expose: ["access-token", "expiry", "token-type", "uid", "client"],
