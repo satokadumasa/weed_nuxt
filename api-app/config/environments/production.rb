@@ -41,12 +41,12 @@ Rails.application.configure do
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
 
-  config.hosts << "api.september-rain.com"
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
   # config.action_cable.allowed_request_origins = [ENV['WEED_API_ORIGIN_URL1']]
   config.action_cable.allowed_request_origins = '*'
   config.action_cable.disable_request_forgery_protection = true
+  config.hosts << "api.september-rain.com"
   config.hosts << "weed_api.example.com"
   # config.hosts << "api.september-rain.com"
   # Use a different logger for distributed setups.
@@ -90,7 +90,7 @@ Rails.application.configure do
   config.middleware.insert_before 0, Rack::Cors do
     allow do
       # origins ENV['WEED_API_ORIGIN_URL1']
-      origins '*'
+      origins [ENV['WEED_API_ORIGIN_URL1'],ENV['WEED_API_ORIGIN_URL2']]
       resource '*',
                headers: :any,
                expose: ["access-token", "expiry", "token-type", "uid", "client"],
