@@ -79,6 +79,7 @@ Rails.application.configure do
   config.hosts.clear
   config.hosts = [
     "weed_api.example.com",
+    "api.september-rain.com",
     "backend",
   ]
   # onfig.middleware.delete ActionDispatch::HostAuthorization
