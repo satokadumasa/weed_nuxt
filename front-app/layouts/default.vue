@@ -90,7 +90,7 @@ export default {
           to: '/rooms/'
         },
         {
-          icon: 'mdi-cast',
+          icon: 'mdi-television-classic',
           title: 'Vchats',
           to: '/vchats/'
         },
