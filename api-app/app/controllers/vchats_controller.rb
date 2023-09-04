@@ -3,9 +3,15 @@ class VchatsController < ApplicationController
 
   # GET /vchats
   def index
-    @vchats = Vchat.all
-
-    render json: @vchats
+    pp vchat_params.inspect
+    per = vchat_params[:per] != nil ? vchat_params[:per].to_i : 10
+    page = vchat_params[:page] != nil ? vchat_params[:page].to_i : 1
+    logger.debug "per[#{vchat_params[:per]}] psgr[#{vchat_params[:page]}]"
+    @vchats = Vchat.all.order(id: "DESC").page(page).per(per)
+    @count = Vchat.count
+    page_num = @count / per
+    @max_page = page_num * per < @count ? page_num + 1 : page_num
+    render json: {vchats: @vchats, count: @count, max_page: @max_page}
   end
 
   # GET /vchats/1

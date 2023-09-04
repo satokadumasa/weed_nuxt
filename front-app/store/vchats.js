@@ -58,6 +58,7 @@ export const actions = {
     return this.$axios
       .$get("/vchats/?page=" + params.page + searchData)
       .then((response) => {
+        console.log("asyncVchats() params:" + JSON.stringify(params));
         commit("SET_VCHATS", response.vchats);
         commit("SET_MAX_PAGE", response.max_page);
         commit("SET_COUNT", response.count);

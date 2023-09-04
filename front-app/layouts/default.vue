@@ -90,6 +90,11 @@ export default {
           to: '/rooms/'
         },
         {
+          icon: 'mdi-cast',
+          title: 'Vchats',
+          to: '/vchats/'
+        },
+        {
           icon: 'mdi-chart-bubble',
           title: 'About',
           to: '/about'

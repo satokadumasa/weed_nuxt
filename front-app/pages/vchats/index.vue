@@ -57,6 +57,7 @@ export default {
         per: query.per,
       }),
     ]).then((response) => {
+      console.log("asyncData() response:" + JSON.stringify(response));
       return {
         vchats: _.cloneDeep(store.getters["vchats/vchats"]),
         max_page: _.cloneDeep(store.getters["vchats/max_page"]),
@@ -65,7 +66,7 @@ export default {
   },
   data() {
     return {
-      vchats: {},
+      // vchats: {},
       page: !_.isEmpty(this.$nuxt.$route.query.page)
         ? parseInt(this.$nuxt.$route.query.page)
         : 1,
@@ -85,6 +86,9 @@ export default {
           : "",
       }
     };
+  },
+  created() {
+    console.log("created() vchats:" + JSON.stringify(this.vchats));
   },
   methods: {
     filledValues(values) {
