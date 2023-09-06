@@ -26,9 +26,6 @@ import JitsiMeetExternalAPI from '~/mixins//external_api.js';
 
 export default {
   name: 'vchats',
-  // components: {
-  //   JitsiMeetExternalAPI,
-  // },
   asyncData({ store, app, query }) {
     console.log("asyncData() id:" + $nuxt.$route.params.id);
     return Promise.all([
@@ -45,8 +42,8 @@ export default {
       const domain = 'jitsi.september-rain.com'; // Jitsi用に使用しているドメイン名
       const options = {
         roomName: this.vchat.name, // チャットルーム名
-        width: 700, // ビデオチャット表示部分の幅
-        height: 700, // ビデオチャット表示部分の高さ
+        width: document.documentElement.clientWidth - 50, // ビデオチャット表示部分の幅
+        height: document.documentElement.clientHeight - 250, // ビデオチャット表示部分の高さ
         parentNode: document.querySelector('#meet') // ビデオチャットを表示する要素のID
       };
       const api = new JitsiMeetExternalAPI(domain, options);
@@ -67,19 +64,6 @@ export default {
       }
     };
   },
-  created() {
-    // const websocketUrl = `${process.env.WS_BASE_URL}/cable`;
-    // this.cable = ActionCable.createConsumer(websocketUrl);
-    // console.log("created() user:" + JSON.stringify(this.$auth.user));
-    // this.chatChannel = this.cable.subscriptions.create(
-    //   {channel: "ChatChannel", vchat: this.vchat.id, user_id: this.$auth.user.id},
-    //   {received: (response) => {
-    //       console.log("response:" + JSON.stringify(response));
-    //       this.$store.commit("addMessage", response);
-    //     }
-    //   }
-    // );
-  },
   computed: {
     ...mapGetters({
       messageList: "messageList",
@@ -89,17 +73,6 @@ export default {
     home() {
       this.$routes.push('/');
     },
-    // sendMessage() {
-    //   console.log("sendMessage()");
-    //   if(!_.isEmpty(this.form.message)) {
-    //     this.chatChannel.perform('speak', {
-    //       username: this.$auth.user.nickname,
-    //       user_id: this.$auth.user.id,
-    //       message:this.form.message,
-    //     });
-    //     this.form.message = "";
-    //   }
-    // },
   },
 }
 </script>
