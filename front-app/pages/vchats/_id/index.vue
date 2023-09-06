@@ -13,20 +13,7 @@
     </div>
     <div id="meet">
     </div>
-    <br>
-    <script src='https://jitsi.september-rain.com/external_api.js'></script>
-    <script> 
-      const domain = 'jitsi.september-rain.com'; // Jitsi用に使用しているドメイン名
-      const options = {
-        roomName: '{{ vchat.name }}', // チャットルーム名
-        width: 700, // ビデオチャット表示部分の幅
-        height: 700, // ビデオチャット表示部分の高さ
-        parentNode: document.querySelector('#meet') // ビデオチャットを表示する要素のID
-      };
-      const api = new JitsiMeetExternalAPI(domain, options);
-  		api.executeCommand('displayName', '{{ $auth.user.nickname }}'); // ニックネーム（表示名）を指定する
     </script>
-
   </div>
 </template>
 
