@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_action :set_page, only: [:show, :update, :destroy]
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :login_user, only: [:create, :update, :destroy]
 
   # GET /pages
   def index

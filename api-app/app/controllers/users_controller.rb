@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :login_user, only: [:create, :update, :destroy]
 
   def index
     pp "UsersController.index"

@@ -1,5 +1,6 @@
 class PageCommentsController < ApplicationController
   before_action :set_page_comment, only: [:show, :update, :destroy]
+  before_action :login_user, only: [:create, :update, :destroy]
 
   # GET /page_comments
   def index
