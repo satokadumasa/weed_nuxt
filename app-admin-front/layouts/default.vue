@@ -99,14 +99,39 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'Home',
           to: '/'
         },
         {
+          icon: 'mdi-view-dashboard',
+          title: 'Boards',
+          to: '/boards/'
+        },
+        {
+          icon: 'mdi-book-open-page-variant',
+          title: 'Notes',
+          to: '/notes/'
+        },
+        {
+          icon: 'mdi-cast',
+          title: 'Rooms',
+          to: '/rooms/'
+        },
+        {
+          icon: 'mdi-television-classic',
+          title: 'Vchats',
+          to: '/vchats/'
+        },
+        {
           icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
+          title: 'About',
+          to: '/about'
+        },
+        {
+          icon: 'mdi-account',
+          title: 'Profile',
+          to: '/profile'
+        },
       ],
       miniVariant: false,
       right: true,
