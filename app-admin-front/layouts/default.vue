@@ -112,26 +112,6 @@ export default {
           title: 'Notes',
           to: '/notes/'
         },
-        {
-          icon: 'mdi-cast',
-          title: 'Rooms',
-          to: '/rooms/'
-        },
-        {
-          icon: 'mdi-television-classic',
-          title: 'Vchats',
-          to: '/vchats/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'About',
-          to: '/about'
-        },
-        {
-          icon: 'mdi-account',
-          title: 'Profile',
-          to: '/profile'
-        },
       ],
       miniVariant: false,
       right: true,

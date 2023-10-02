@@ -95,7 +95,7 @@ export const actions = {
         });
         console.log("asyncNotes() searchData:" + searchData);
         return this.$axios
-            .$get("/notes/?page=" + params.page + searchData)
+            .$get("/administrator/notes/?page=" + params.page + searchData)
             .then((response) => {
                 commit("SET_NOTES", response.notes);
                 // commit("SET_MAX_PAGE", response.max_page);
@@ -113,7 +113,7 @@ export const actions = {
     asyncNote({ commit }, params) {
         console.log("asyncNote() params:" + params);
         return this.$axios
-            .$get("/notes/" + params.id)
+            .$get("/administrator/notes/" + params.id)
             .then((response) => {
                 console.log("asyncNote() note:" + JSON.stringify(response));
                 commit("SET_NOTE", response.note);
@@ -131,7 +131,7 @@ export const actions = {
     asyncNoteCreate({ commit }, params) {
         console.log("asyncNoteCreate() params:" + JSON.stringify(params));
         return this.$axios
-            .$post("/notes/", params)
+            .$post("/administrator/notes/", params)
             .then((response) => {
                 commit("SET_NOTES", response.notes);
                 return response;
@@ -147,7 +147,7 @@ export const actions = {
     asyncNoteUpdate({ commit }, params) {
         console.log("asyncNoteUpdate() params:" + JSON.stringify(params));
         return this.$axios
-            .$put("/notes/" + params.id , params)
+            .$put("/administrator/notes/" + params.id , params)
             .then((response) => {
                 console.log("asyncNoteCommentCreate() response:" + JSON.stringify(response));
                 commit("SET_NOTES", response.notes);
@@ -164,7 +164,7 @@ export const actions = {
     asyncNoteDelete({ commit }, params) {
         console.log("asyncNoteDelete() params:" + JSON.stringify(params));
         return this.$axios
-            .$delete("/notes/" + params.id)
+            .$delete("/administrator/notes/" + params.id)
             .then((response) => {
                 return response;
             });
@@ -179,7 +179,7 @@ export const actions = {
     asyncPage({ commit }, params) {
         console.log("asyncPage() params:" + params);
         return this.$axios
-            .$get("/pages/" + params.id)
+            .$get("/administrator/pages/" + params.id)
             .then((response) => {
                 console.log("asyncPage() page:" + JSON.stringify(response));
                 commit("SET_PAGE", response);
@@ -189,7 +189,7 @@ export const actions = {
     asyncPages({ commit }, params) {
       console.log("asyncPage() params:" + JSON.stringify(params));
       return this.$axios
-          .$get("/pages/?note_id=" + params.note_id)
+          .$get("/administrator/pages/?note_id=" + params.note_id)
           .then((response) => {
               console.log("asyncPage() page:" + JSON.stringify(response));
               // commit("SET_PAGES", response);
@@ -206,7 +206,7 @@ export const actions = {
     asyncPageCreate({ commit }, params) {
         console.log("asyncPageCreate() params:" + JSON.stringify(params));
         return this.$axios
-            .$post("/pages/", params)
+            .$post("/administrator/pages/", params)
             .then((response) => {
                 commit("SET_PAGES", response.pages);
                 return response;
@@ -222,7 +222,7 @@ export const actions = {
     asyncPageeUpdate({ commit }, params) {
         console.log("asyncPageeUpdate() params:" + JSON.stringify(params));
         return this.$axios
-            .$put("/pages/" + params.id , params)
+            .$put("/administrator/pages/" + params.id , params)
             .then((response) => {
                 console.log("asyncNoteCommentCreate() response:" + JSON.stringify(response));
                 commit("SET_PAGES", response.pages);
@@ -239,7 +239,7 @@ export const actions = {
     asyncPageDelete({ commit }, params) {
         console.log("asyncPageDelete() params:" + JSON.stringify(params));
         return this.$axios
-            .$delete("/pages/" + params.id)
+            .$delete("/administrator/pages/" + params.id)
             .then((response) => {
                 return response;
             });
@@ -247,7 +247,7 @@ export const actions = {
     asyncNoteBookmarkCreate({ commit }, params) {
       console.log("asyncNoteBookmarkCreate() params:" + JSON.stringify(params));
       return this.$axios
-        .$post("/note_bookmarks/", params)
+        .$post("/administrator/note_bookmarks/", params)
         .then((response) => {
           return response;
         });
