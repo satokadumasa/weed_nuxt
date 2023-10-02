@@ -1,18 +1,34 @@
 Rails.application.routes.draw do
+  namespace :administrator do
+    resources :boards
+    resources :board_comments
+    resources :notes
+    resources :pages
+  end
+  namespace :normal do
+    resources :boards
+    resources :board_comments
+    resources :board_bookmarks
+    resources :notes
+    resources :note_bookmarks
+    resources :pages
+  end
+
   resources :vchats
   resources :whispers
   resources :user_rooms
   resources :rooms
   resources :follows
-  resources :note_bookmarks
+  # resources :boards
+  # resources :board_comments
+  # resources :board_bookmarks
+  # resources :notes
+  # resources :note_bookmarks
+  # resources :pages
   resources :page_comments
-  resources :board_bookmarks
-  resources :board_comments
-  resources :boards
-  resources :pages
-  resources :notes
   resources :user_roles
   resources :roles
+
   get 'home/index'
   post '/users/remove', to: 'users#remove'
   put '/users/update', to: 'users#update'

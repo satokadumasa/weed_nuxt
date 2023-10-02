@@ -82,7 +82,7 @@ export const actions = {
       });
       console.log("asyncBoards() searchData:" + searchData);
       return this.$axios
-        .$get("/boards/?page=" + params.page + searchData)
+        .$get("/nomal/boards/?page=" + params.page + searchData)
         .then((response) => {
           commit("SET_BOARDS", response.boards);
           commit("SET_MAX_PAGE", response.max_page);
@@ -93,7 +93,7 @@ export const actions = {
     asyncBoard({ commit }, params) {
       console.log("asyncBoard() params:" + params);
       return this.$axios
-        .$get("/boards/" + params.id)
+        .$get("/nomal/boards/" + params.id)
         .then((response) => {
           console.log("asyncBoard() board:" + JSON.stringify(response));
           commit("SET_BOARD", response.board);
@@ -110,7 +110,7 @@ export const actions = {
     asyncBoardCreate({ commit }, params) {
       console.log("asyncBoardCreate() params:" + JSON.stringify(params));
       return this.$axios
-        .$post("/boards/", params)
+        .$post("/nomal/boards/", params)
         .then((response) => {
           commit("SET_BOARDS", response.boards);
           return response;
@@ -119,7 +119,7 @@ export const actions = {
     asyncBoardUpdate({ commit }, params) {
       console.log("asyncBoardUpdate() params:" + JSON.stringify(params));
       return this.$axios
-        .$put("/boards/" + params.id , params)
+        .$put("/nomal/boards/" + params.id , params)
         .then((response) => {
           console.log("asyncBoardCommentCreate() response:" + JSON.stringify(response));
           commit("SET_BOARDS", response.boards);
@@ -129,7 +129,7 @@ export const actions = {
     asyncBoardDelete({ commit }, params) {
       console.log("asyncBoardDelete() params:" + JSON.stringify(params));
       return this.$axios
-        .$delete("/boards/" + params.id)
+        .$delete("/nomal/boards/" + params.id)
         .then((response) => {
           return response;
         });
@@ -137,7 +137,7 @@ export const actions = {
     asyncBoardCommentCreate({ commit }, params) {
       console.log("asyncBoardCommentCreate() params:" + JSON.stringify(params));
       return this.$axios
-        .$post("/board_comments/", params)
+        .$post("/nomal/board_comments/", params)
         .then((response) => {
           console.log("asyncBoardCommentCreate() response:" + JSON.stringify(response));
           commit("SET_BOARDS", response.boards);
@@ -147,7 +147,7 @@ export const actions = {
     asyncBoardComments({ commit }, params) {
       console.log("asyncBoardComments() params:" + JSON.stringify(params));
       return this.$axios
-        .$get("/board_comments/?board_id=" + params.board_id)
+        .$get("/nomal/board_comments/?board_id=" + params.board_id)
         .then((response) => {
           console.log("asyncBoardComments() response:" + JSON.stringify(response));
           commit("SET_BOARD_COMMENTS", response);
@@ -157,7 +157,7 @@ export const actions = {
     asyncBoardBookmarkCreate({ commit }, params) {
       console.log("asyncBoardBookmarkCreate() params:" + JSON.stringify(params));
       return this.$axios
-        .$post("/board_bookmarks/", params)
+        .$post("/nomal/board_bookmarks/", params)
         .then((response) => {
           return response;
         });

@@ -1,6 +1,5 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :update, :destroy]
-  before_action :login_user, only: [:create, :update, :destroy]
 
   # GET /notes
   def index

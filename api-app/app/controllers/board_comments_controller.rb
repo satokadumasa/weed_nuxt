@@ -1,6 +1,5 @@
 class BoardCommentsController < ApplicationController
   before_action :set_board_comment, only: [:show, :update, :destroy]
-  before_action :login_user, only: [:create, :update, :destroy]
   # GET /board_comments
   def index
     pp "index board_comment_params:" << board_comment_params.inspect
