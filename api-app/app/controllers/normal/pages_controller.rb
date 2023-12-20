@@ -1,3 +1,3 @@
 class Normal::PagesController < PagesController
-  class Normal::NotesController < NotesController
-  end
+  before_action :authenticate_user!, only: [:show, :update, :destroy]
+end
