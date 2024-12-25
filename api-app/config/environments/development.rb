@@ -55,7 +55,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     # メールサーバ名
-    :address => "smtp.gmail.com",
+    :address => "mail80.onamae.ne.jp",
     # メールサーバポート番号
     :port => 587,
     # メールアドレス(参照している)
@@ -80,7 +80,7 @@ Rails.application.configure do
   config.hosts.clear
   config.hosts = [
     "weed_api.example.com",
-    "api.september-rain.com",
+    "weed-api.september-rain.com",
     "backend",
   ]
   # onfig.middleware.delete ActionDispatch::HostAuthorization

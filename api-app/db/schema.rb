@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
-  create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "admins", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["uid", "provider"], name: "index_admins_on_uid_and_provider", unique: true
   end
 
-  create_table "board_bookmarks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "board_bookmarks", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "board_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["user_id"], name: "index_board_bookmarks_on_user_id"
   end
 
-  create_table "board_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "board_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "board_id"
     t.string "title", limit: 64
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["user_id"], name: "index_board_comments_on_user_id"
   end
 
-  create_table "boards", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "boards", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id"
     t.string "title", limit: 64
     t.text "detail"
@@ -70,21 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
-  create_table "bookmark_boards", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "board_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "bookmark_notes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "note_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "follows", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "follows", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", null: false
@@ -94,14 +80,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
 
-  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "note_bookmarks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "note_bookmarks", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "note_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -111,7 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["user_id"], name: "index_note_bookmarks_on_user_id"
   end
 
-  create_table "notes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "notes", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id"
     t.string "title", limit: 64
     t.text "overview"
@@ -124,7 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
-  create_table "page_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "page_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "page_id"
     t.string "title"
@@ -133,7 +119,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "pages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "note_id"
     t.string "title", limit: 64
@@ -146,14 +132,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
-  create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "roles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", limit: 32
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_roles_on_name"
   end
 
-  create_table "rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "rooms", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
     t.text "overview"
@@ -161,7 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "user_roles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
     t.datetime "created_at", null: false
@@ -170,7 +156,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["user_id"], name: "index_user_roles_on_user_id"
   end
 
-  create_table "user_rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "user_rooms", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
     t.datetime "created_at", null: false
@@ -180,7 +166,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["user_id"], name: "index_user_rooms_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -211,7 +197,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  create_table "vchats", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "vchats", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
     t.text "orverview"
@@ -219,7 +205,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "whispers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "whispers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
     t.text "body"
