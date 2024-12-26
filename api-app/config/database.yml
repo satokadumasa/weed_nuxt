@@ -51,5 +51,3 @@ test:
 production:
   <<: *default
   database: weed_api_production
-  username: <%= ENV['WEED_API_DATABASE_USERNAME'] %>
-  password: <%= ENV['WEED_API_DATABASE_PASSWORD'] %>
