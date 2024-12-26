@@ -19,12 +19,6 @@ Rails.application.routes.draw do
   resources :user_rooms
   resources :rooms
   resources :follows
-  # resources :boards
-  # resources :board_comments
-  # resources :board_bookmarks
-  # resources :notes
-  # resources :note_bookmarks
-  # resources :pages
   resources :page_comments
   resources :user_roles
   resources :roles

@@ -47,8 +47,14 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ENV['WEED_API_ORIGIN_URL1']]
   config.action_cable.allowed_request_origins = '*'
   config.action_cable.disable_request_forgery_protection = true
-  config.hosts << "api.september-rain.com"
   # config.hosts << "api.september-rain.com"
+  config.hosts = [
+    "weed_api.example.com",
+    "weed-api.september-rain.com",
+    "weed-api-dev.september-rain.com",
+    "backend",
+  ]
+
   # Use a different logger for distributed setups.
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
@@ -76,7 +82,7 @@ Rails.application.configure do
     # :user_name => Rails.application.credentials.gmail[:mail_address],
     # # アプリパスワード(参照している)
     # :password => Rails.application.credentials.gmail[:app_password]
-    :address => "smtp.gmail.com",
+    :address => "mail80.onamae.ne.jp",
     :port => 587,
     # メールアドレス(参照している)
     :user_name => Rails.application.credentials.gmail[:mail_address],
@@ -87,6 +93,7 @@ Rails.application.configure do
     :authentication => :plain,
     :enable_starttls_auto => true
   }
+
   config.middleware.insert_before 0, Rack::Cors do
     allow do
       # origins ENV['WEED_API_ORIGIN_URL1']
