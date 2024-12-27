@@ -162,4 +162,25 @@ export const actions = {
           return response;
         });
     },
+    searchBoards({ commit }, params) {
+      console.log("searchBoards() params:" + JSON.stringify(params));
+      let searchData = "";
+      _.each(params, (value, key) => {
+        console.log("asyncBoards() key[" + key + "] value[" + value + "]");
+        if (key != "page" && value != undefined && value != "") {
+          if(value != '') {
+            searchData += `&${key}=${value}`;
+          }
+        }
+      });
+
+      console.log("searchBoards() searchData:" + searchData);
+      return this.$axios
+        .$get("/normal/boards/?page=1" + searchData)
+        .then((response) => {
+          commit("SET_BOARDS", response.boards);
+          return response;
+        });
+    },
+
 };  
