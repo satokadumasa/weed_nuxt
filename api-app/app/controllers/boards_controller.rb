@@ -3,11 +3,20 @@ class BoardsController < ApplicationController
 
   # GET /boards
   def index
-    pp board_params.inspect
+    pp "BoardsController::index()"
+    pp "index() board_params:" << board_params.inspect
     per = board_params[:per] != nil ? board_params[:per].to_i : 10
     page = board_params[:page] != nil ? board_params[:page].to_i : 1
-    logger.debug "per[#{board_params[:per]}] psgr[#{board_params[:page]}]"
-    @boards = Board.all.order(id: "DESC").page(page).per(per)
+    keyword = board_params[:keyword] != nil ? board_params[:keyword] : nil
+    pp "BoardsController::index() per[#{per}] page[#{page}] keyword[#{keyword}]"
+    @boards = []
+    if keyword
+      pp "BoardsController::index() keyword is not nil"
+      @boards = Board.all.order(id: "DESC").where("title LIKE ?", "%#{keyword}%").or(Board.where("detail LIKE ?", "%#{keyword}%")).page(page).per(per)
+    else
+      pp "BoardsController::index() keyword is nill"
+      @boards = Board.all.order(id: "DESC").page(page).per(per)
+    end
     @count = Board.count
     page_num = @count / per
     @max_page = page_num * per < @count ? page_num + 1 : page_num
@@ -61,6 +70,6 @@ class BoardsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def board_params
-      params.permit(:title, :detail, :per, :page)
+      params.permit(:title, :detail, :per, :page, :keyword)
     end
 end
