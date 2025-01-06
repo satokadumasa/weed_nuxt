@@ -1,6 +1,5 @@
 class RolesController < ApplicationController
   before_action :set_role, only: [:show, :update, :destroy]
-  # before_action :authenticate_user!
 
   # GET /roles
   def index

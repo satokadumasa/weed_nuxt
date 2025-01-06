@@ -22,7 +22,7 @@ class NotesController < ApplicationController
     @note.user_id = current_user.id
 
     if @note.save
-      render json: @note, status: :created, location: @note
+      render json: @note, status: :created
     else
       render json: @note.errors, status: :unprocessable_entity
     end
