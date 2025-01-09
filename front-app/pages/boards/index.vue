@@ -1,6 +1,22 @@
 <template>
   <v-app>
     <h1>Board List</h1>
+    <table class="list" style="margin-left: 20px;">
+      <tbody>
+        <tr>
+          <th>キーワード</th>
+          <td>
+            <v-text-field name="userkeyword" v-model="searchform.keyword" item-text="KYEWORD" item-value="id" :clearable="true" />
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <v-btn @click="handleSearch()">検索</v-btn>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <v-pagination
       v-model="page"
       :length="max_page"
@@ -83,6 +99,7 @@ export default {
         per: !_.isEmpty(this.$nuxt.$route.query.per)
           ? this.$nuxt.$route.query.per
           : "",
+        keyword: "",
       }
     };
   },
@@ -122,6 +139,22 @@ export default {
     },
     createBoard() {
       this.$router.push('/boards/create');
+    },
+    handleSearch() {
+      this.searchform.page = 1;
+      this.searchform.per = 10;
+      // console.log("handleSearch() this.searchform:" + JSON.stringify(this.searchform));
+      
+      const query = this.filledValues(this.searchform);
+      const VM = this;
+      this.$store
+        .dispatch("boards/searchBoards", this.searchform)
+        .then((resposne) => {
+          // this.$router.push({ query: query });
+          this.boards = _.cloneDeep(
+            VM.$store.getters["boards/boards"]
+          );
+        });
     },
   },
 }

@@ -2,7 +2,7 @@ class BoardCommentsController < ApplicationController
   before_action :set_board_comment, only: [:show, :update, :destroy]
   # GET /board_comments
   def index
-    pp "index board_comment_params:" << board_comment_params.inspect
+    # pp "index board_comment_params:" << board_comment_params.inspect
     # @board_comments = BoardComment.where(board_id: board_comment_params[:board_id]).all
     # @board = @board_comments[1]
     board_comments = BoardComment.eager_load(:user).where(board_id: params[:board_id]).all
