@@ -1,6 +1,22 @@
 <template>
   <v-app>
     <h1>Note List</h1>
+    <table class="list" style="margin-left: 20px;">
+      <tbody>
+        <tr>
+          <th>キーワード</th>
+          <td>
+            <v-text-field name="userkeyword" v-model="searchform.keyword" item-text="KYEWORD" item-value="id" :clearable="true" />
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <v-btn @click="handleSearch()">検索</v-btn>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <v-pagination
       v-model="page"
       :length="max_page"
@@ -122,6 +138,21 @@ export default {
     },
     createNote() {
       this.$router.push('/notes/create');
+    },
+    handleSearch() {
+      this.searchform.page = 1;
+      this.searchform.per = 10;
+      
+      const query = this.filledValues(this.searchform);
+      const VM = this;
+      this.$store
+        .dispatch("notes/searchNotes", this.searchform)
+        .then((resposne) => {
+          // this.$router.push({ query: query });
+          this.boards = _.cloneDeep(
+            VM.$store.getters["notes/notes"]
+          );
+        });
     },
   },
 }
