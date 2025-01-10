@@ -87,21 +87,21 @@ export const actions = {
         let searchData = "";
         _.each(params, (value, key) => {
         console.log("asyncNotes() key[" + key + "] value[" + value + "]");
-        if (key != "page" && value != undefined && value != "") {
-            if(value != '') {
+        if (value != undefined && value != "") {
+          if(value != '') {
             searchData += `&${key}=${value}`;
-            }
+          }
         }
         });
         console.log("asyncNotes() searchData:" + searchData);
         return this.$axios
-            .$get("/normal/notes/?page=" + params.page + searchData)
-            .then((response) => {
-                commit("SET_NOTES", response.notes);
-                // commit("SET_MAX_PAGE", response.max_page);
-                // commit("SET_COUNT", response.count);
-                return response;
-            });
+          .$get("/normal/notes/?" + searchData)
+          .then((response) => {
+            commit("SET_NOTES", response.notes);
+            commit("SET_MAX_PAGE", response.max_page);
+            commit("SET_COUNT", response.count);
+            return response;
+          });
     },
     /**
      * ノート詳細

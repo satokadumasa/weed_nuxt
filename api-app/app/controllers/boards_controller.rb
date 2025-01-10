@@ -17,7 +17,7 @@ class BoardsController < ApplicationController
       pp "BoardsController::index() keyword is nill"
       @boards = Board.all.order(id: "DESC").page(page).per(per)
     end
-    @count = @boards.count
+    @count = Board.count
     page_num = @count / per
     @max_page = page_num * per < @count ? page_num + 1 : page_num
     render json: {boards: @boards, count: @count, max_page: @max_page}

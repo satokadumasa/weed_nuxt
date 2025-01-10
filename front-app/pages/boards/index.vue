@@ -115,12 +115,8 @@ export default {
     },
     async pagination() {
       console.log("pagination()");
-      if (_.isEmpty(this.page)) {
-        this.searchform.page = this.page;
-      }
-      if (_.isEmpty(this.per)) {
-        this.searchform.per = this.per;
-      }
+      this.searchform.page = _.isEmpty(this.page) ? this.page : 1;
+      this.searchform.per= _.isEmpty(this.per) ? this.per : 10;
       console.log("pagination() this.searchform:" + JSON.stringify(this.searchform));
       
       const query = this.filledValues(this.searchform);

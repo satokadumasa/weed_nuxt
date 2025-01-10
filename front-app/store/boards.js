@@ -74,7 +74,7 @@ export const actions = {
       let searchData = "";
       _.each(params, (value, key) => {
         console.log("asyncBoards() key[" + key + "] value[" + value + "]");
-        if (key != "page" && value != undefined && value != "") {
+        if (value != undefined && value != "") {
           if(value != '') {
             searchData += `&${key}=${value}`;
           }

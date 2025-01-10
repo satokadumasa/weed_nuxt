@@ -15,10 +15,9 @@ class NotesController < ApplicationController
       @notes = Note.all.order(id: "DESC").where("title LIKE ?", "%#{keyword}%").or(Note.where("overview LIKE ?", "%#{keyword}%")).or(Note.where("detail LIKE ?", "%#{keyword}%")).page(page).per(per)
     else
       pp "Note non serch"
-      @notes = Note.all.order(id: "DESC").page(params[:page]).per(params[:per])
+      @notes = Note.all.order(id: "DESC").page(page).per(per)
     end
-    @count = @notes.count
-    pp "NotesController::index() count[#{@count}]"
+    @count = Note.count
     page_num = @count / per
     @max_page = page_num * per < @count ? page_num + 1 : page_num
     render json: {notes: @notes, count: @count, max_page: @max_page}
@@ -67,6 +66,6 @@ class NotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def note_params
-      params.permit(:title, :overview, :detail, :keyword)
+      params.permit(:title, :overview, :detail, :per, :page, :keyword)
     end
 end
