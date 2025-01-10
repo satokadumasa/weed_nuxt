@@ -149,7 +149,7 @@ export default {
         .dispatch("notes/searchNotes", this.searchform)
         .then((resposne) => {
           // this.$router.push({ query: query });
-          this.boards = _.cloneDeep(
+          this.notes = _.cloneDeep(
             VM.$store.getters["notes/notes"]
           );
         });

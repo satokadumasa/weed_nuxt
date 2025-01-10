@@ -73,30 +73,18 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: ENV['WEED_COMFIRM_BASE_URL'] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    # :enable_starttls_auto => true,
-    # :address => 'smtp.gmail.com',
-    # :port => 587,
-    # :domain => 'september-rain.com',
-    # :authentication => :login,
-    # # メールアドレス(参照している)
-    # :user_name => Rails.application.credentials.gmail[:mail_address],
-    # # アプリパスワード(参照している)
-    # :password => Rails.application.credentials.gmail[:app_password]
     :address => "mail80.onamae.ne.jp",
     :port => 587,
     # メールアドレス(参照している)
     :user_name => Rails.application.credentials.gmail[:mail_address],
     # アプリパスワード(参照している)
     :password => Rails.application.credentials.gmail[:app_password],
-    # :user_name => Rails.application.credentials.google[:mail],
-    # :password => Rails.application.credentials.google[:password],
     :authentication => :plain,
     :enable_starttls_auto => true
   }
 
   config.middleware.insert_before 0, Rack::Cors do
     allow do
-      # origins ENV['WEED_API_ORIGIN_URL1']
       # origins [ENV['WEED_API_ORIGIN_URL1'],ENV['WEED_API_ORIGIN_URL2']]
       origins '*'
       resource '*',
