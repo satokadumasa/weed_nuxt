@@ -81,7 +81,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
   end
 
   create_table "messages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "sender_id"
+    t.integer "recipient_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
