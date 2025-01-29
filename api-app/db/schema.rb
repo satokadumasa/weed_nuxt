@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_29_005720) do
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -81,10 +81,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_225912) do
   end
 
   create_table "messages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "sender_id"
+    t.integer "recipient_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "note_bookmarks", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
