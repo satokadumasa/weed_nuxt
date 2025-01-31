@@ -6,23 +6,26 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # User
-# User.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ')
-# User.create(email: 'operator@example.com', uid: 'operator@example.com',password: 'password',nickname: 'オペレータ')
+User.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ', confirmed_at: '2025-01-10 00:00:00')
+User.create(email: 'operator@example.com', uid: 'operator@example.com',password: 'password',nickname: 'オペレータ', confirmed_at: '2025-01-10 00:00:00')
+User.create(email: 'ksato@example.com', uid: 'ksato@example.com',password: 'password',nickname: 'KSato', confirmed_at: '2025-01-10 00:00:00')
+User.create(email: 'susanoo@example.com', uid: 'susanoo@example.com',password: 'password',nickname: 'susanoo', confirmed_at: '2025-01-10 00:00:00')
+User.create(email: 'rainyrook@example.com', uid: 'rainyrook@example.com',password: 'password',nickname: 'Rainyrook', confirmed_at: '2025-01-10 00:00:00')
 
 #admin
-# Admin.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ')
+Admin.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ', confirmed_at: '2025-01-10 00:00:00')
 
 # Role
-# Role.create(name: 'admin')
-# Role.create(name: 'operator')
-# Role.create(name: 'user')
+Role.create(name: 'admin')
+Role.create(name: 'operator')
+Role.create(name: 'user')
 
 # User-Role
-# UserRole.create(user_id:1, role_id:1)
-# UserRole.create(user_id:2, role_id:2)
-# UserRole.create(user_id:3, role_id:3)
-# UserRole.create(user_id:4, role_id:3)
-# UserRole.create(user_id:5, role_id:3)
+UserRole.create(user_id:1, role_id:1)
+UserRole.create(user_id:2, role_id:2)
+UserRole.create(user_id:3, role_id:3)
+UserRole.create(user_id:4, role_id:3)
+UserRole.create(user_id:5, role_id:3)
 
 # #Board
 Board.create(user_id: 1,title: 'フリートーク', detail: "フリートーク\n\nなんでもいいから書いてね。\n")
@@ -138,3 +141,13 @@ Page.create(user_id: 3,note_id: 1,title: 'TITLE001-08', overview: "ORVERVIEW0800
 Page.create(user_id: 3,note_id: 1,title: 'TITLE001-09', overview: "ORVERVIEW09001-09", detail: "DETAIL09001-09")
 Page.create(user_id: 3,note_id: 1,title: 'TITLE001-10', overview: "ORVERVIEW10001-10", detail: "DETAIL10001-10")
 Page.create(user_id: 3,note_id: 1,title: 'TITLE001-11', overview: "ORVERVIEW11001-11", detail: "DETAIL11001-11")
+
+# Message
+Message.create(sender_id: 2, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 5, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 4, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 5, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 5, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 4, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 4, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 5, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")

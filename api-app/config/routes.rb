@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   namespace :administrator do
     resources :boards
     resources :board_comments
