@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # User
+<<<<<<< HEAD
 User.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ')
 User.create(email: 'operator@example.com', uid: 'operator@example.com',password: 'password',nickname: 'オペレータ')
 User.create(email: 'ksato@example.com', uid: 'ksato@example.com',password: 'password',nickname: 'KSato')
@@ -14,6 +15,16 @@ User.create(email: 'susanoo@example.com', uid: 'susanoo@example.com',password: '
 
 #admin
 Admin.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ')
+=======
+User.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ', confirmed_at: '2025-01-10 00:00:00')
+User.create(email: 'operator@example.com', uid: 'operator@example.com',password: 'password',nickname: 'オペレータ', confirmed_at: '2025-01-10 00:00:00')
+User.create(email: 'ksato@example.com', uid: 'ksato@example.com',password: 'password',nickname: 'KSato', confirmed_at: '2025-01-10 00:00:00')
+User.create(email: 'susanoo@example.com', uid: 'susanoo@example.com',password: 'password',nickname: 'susanoo', confirmed_at: '2025-01-10 00:00:00')
+User.create(email: 'rainyrook@example.com', uid: 'rainyrook@example.com',password: 'password',nickname: 'Rainyrook', confirmed_at: '2025-01-10 00:00:00')
+
+#admin
+Admin.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ', confirmed_at: '2025-01-10 00:00:00')
+>>>>>>> develop
 
 # Role
 Role.create(name: 'admin')
@@ -164,8 +175,11 @@ Page.create(user_id: 3,note_id: 3,title: 'TITLE001-29', overview: "ORVERVIEW0900
 Page.create(user_id: 3,note_id: 4,title: 'TITLE001-30', overview: "ORVERVIEW10001-30", detail: "DETAIL10001-30")
 
 # Message
-Message.create(sender_id: 1,recipient_id: 2,content: 'CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01')
-Message.create(sender_id: 1,recipient_id: 3,content: 'CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01')
-Message.create(sender_id: 3,recipient_id: 4,content: 'CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01')
-Message.create(sender_id: 3,recipient_id: 5,content: 'CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01')
-Message.create(sender_id: 4,recipient_id: 5,content: 'CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01CONTENT01')
+Message.create(sender_id: 2, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 5, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 4, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 5, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 5, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 4, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 4, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")
+Message.create(sender_id: 5, recipient_id: 3, body: "BODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01\nBODY01BODY01BODY01BODY01BODY01")

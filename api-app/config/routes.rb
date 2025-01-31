@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :pages
   end
 
+  resources :messages
   resources :vchats
   resources :whispers
   resources :user_rooms

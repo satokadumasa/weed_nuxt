@@ -24,7 +24,7 @@ class BoardCommentsController < ApplicationController
       board = Board.find(board_comment_params[:board_id])
       board.comment_added_at = Time.now
       if board.save
-        render json: @board_comment, status: :created, location: @board_comment
+        render json: @board_comment, status: :created
       else
         render json: @board_comment.errors, status: :unprocessable_entity
       end
