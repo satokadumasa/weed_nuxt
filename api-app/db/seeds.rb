@@ -6,16 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # User
-<<<<<<< HEAD
-User.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ')
-User.create(email: 'operator@example.com', uid: 'operator@example.com',password: 'password',nickname: 'オペレータ')
-User.create(email: 'ksato@example.com', uid: 'ksato@example.com',password: 'password',nickname: 'KSato')
-User.create(email: 'rainyrook@example.com', uid: 'rainyrook@example.com',password: 'password',nickname: 'Rainyrook')
-User.create(email: 'susanoo@example.com', uid: 'susanoo@example.com',password: 'password',nickname: 'Susanoo')
-
-#admin
-Admin.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ')
-=======
 User.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ', confirmed_at: '2025-01-10 00:00:00')
 User.create(email: 'operator@example.com', uid: 'operator@example.com',password: 'password',nickname: 'オペレータ', confirmed_at: '2025-01-10 00:00:00')
 User.create(email: 'ksato@example.com', uid: 'ksato@example.com',password: 'password',nickname: 'KSato', confirmed_at: '2025-01-10 00:00:00')
@@ -24,7 +14,6 @@ User.create(email: 'rainyrook@example.com', uid: 'rainyrook@example.com',passwor
 
 #admin
 Admin.create(email: 'webmaster@example.com', uid: 'webmaster@example.com',password: 'password',nickname: 'ウェブマスタ', confirmed_at: '2025-01-10 00:00:00')
->>>>>>> develop
 
 # Role
 Role.create(name: 'admin')

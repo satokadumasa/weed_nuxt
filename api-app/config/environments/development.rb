@@ -83,6 +83,7 @@ Rails.application.configure do
     "api.september-rain.com",
     "weed-api.september-rain.com",
     "weed-api-dev.september-rain.com",
+    "160.251.120.113",
     "backend",
   ]
   # onfig.middleware.delete ActionDispatch::HostAuthorization

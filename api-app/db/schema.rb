@@ -87,8 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_31_001829) do
     t.timestamp "received_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "note_bookmarks", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|

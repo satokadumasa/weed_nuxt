@@ -52,6 +52,7 @@ Rails.application.configure do
     "weed_api.example.com",
     "weed-api.september-rain.com",
     "weed-api-dev.september-rain.com",
+    "160.251.120.113",
     "backend",
   ]
 
